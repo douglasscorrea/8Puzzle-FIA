@@ -4,6 +4,7 @@ import pygame_functions as pyf
 import constants as c
 import time
 import controls as co
+import shuffle
 
 
 
@@ -45,10 +46,11 @@ class Game_Interface:
         pyf.showSprite(self.spriteList[7])
         pyf.showSprite(self.spriteList[8])
 
-
-        movesList = [6, 5, 2, 1, 4, 2, 8, 7, 7, 6, 5, 3, 1, 8, 2, 4]
-
-        self.movementTest(movesList)
+        self.shuffler = shuffle.Shuffle()
+        self.shuffler.shuffle_algorithm(1000)
+        moves_list = self.shuffler.get_moves_list()
+        print(moves_list)
+        self.movementTest(moves_list)
 
         pyf.endWait()
 

@@ -23,4 +23,4 @@ BLUE_B   = (0, 191, 255)
 GRAY   = (155, 155, 155)
 
 # Tempo tick
-TIME_CONST = 0.001
+TIME_CONST = 0.000001
