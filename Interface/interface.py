@@ -1,5 +1,6 @@
 import pygame, os, sys
 from pygame.locals import *
+import pygame_functions as pyf
 import constants as c
 import controls as co
 
@@ -8,9 +9,11 @@ os.environ['SDL_VIDEO_CENTERED'] = '1'
 
 
 class Game_Interface:
+
     def __init__(self):
         pygame.init()
-        self.display = pygame.display.set_mode(c.SCREEN_SIZE)
+        self.display = pyf.screenSize(1200,800)
+        #self.display = pygame.display.set_mode(c.SCREEN_SIZE)
         pygame.display.set_caption(c.TITLE)
        # for i in range (0,)
         self.button('', 24, c.CONTOUR_MENU, 100, 100, 600, 600, c.BLUE, c.BLUE_B)
@@ -46,8 +49,15 @@ class Game_Interface:
         self.button('A* H1', 24, c.CONTOUR_MENU, c.SCREEN_WIDTH - 150, 160, 100, 60, c.BLUE, c.BLUE_B)
         self.button('A* H2', 24, c.CONTOUR_MENU, c.SCREEN_WIDTH - 225, 270, 100, 60, c.BLUE, c.BLUE_B)
 
+        #instructionLabel = pyf.makeLabel("Teste", 40, 10, 10, "blue", "Agency FB", "Yellow")
+        #pyf.showLabel(instructionLabel)
+
+
+        #pyf.moveSprite(one, 50, 0)
 
 def init_game():
+    one = pyf.makeSprite("/home/paulohenrik/GIT-repository/8Puzzle-FIA/Interface/images/1")
+    pyf.showSprite(one)
     while True:
         for event in pygame.event.get():
             if event.type == QUIT:
@@ -58,11 +68,13 @@ def init_game():
                     interface.quit()
 
         interface.board()
-
-        clock.tick(c.FPS)
-        pygame.display.update()
+        if pyf.keyPressed("up"):
+            pyf.moveSprite(one, 50, 0)
+        #clock.tick(c.FPS)
+        #pygame.display.update()
 
 
 interface = Game_Interface()
-clock = pygame.time.Clock()
+#clock = pygame.time.Clock()
 init_game()
+pyf.endWait()
