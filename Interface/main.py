@@ -7,9 +7,11 @@ import controls as co
 import shuffle
 
 
-
 class Game_Interface:
     def __init__(self):
+        self.mouse_state_plus = False
+        self.mouse_state_minus = False
+
         pyf.screenSize(c.SCREEN_WIDTH, c.SCREEN_HEIGHT)
         pyf.setBackgroundColour(c.GRAY)
 
@@ -64,6 +66,17 @@ class Game_Interface:
 
         self.shuffler = shuffle.Shuffle()
 
+    def initial_position(self):
+        pyf.moveSprite(self.spriteList[1], 150, 150, True)
+        pyf.moveSprite(self.spriteList[2], 350, 150, True)
+        pyf.moveSprite(self.spriteList[3], 550, 150, True)
+        pyf.moveSprite(self.spriteList[4], 150, 350, True)
+        pyf.moveSprite(self.spriteList[5], 350, 350, True)
+        pyf.moveSprite(self.spriteList[6], 550, 350, True)
+        pyf.moveSprite(self.spriteList[7], 150, 550, True)
+        pyf.moveSprite(self.spriteList[8], 350, 550, True)
+        pyf.moveSprite(self.spriteList[0], 550, 550, True)
+
     def run(self):
         # RODA ATE A TECLA ESC SER PRESSIONADA
         keys = pygame.key.get_pressed()
@@ -76,13 +89,31 @@ class Game_Interface:
                 keys = pygame.key.get_pressed()
                 waittime += 20
 
+            # Incrementa Iteracoes
             if pyf.spriteClicked(self.plus):
-                c.IT += 1
+                if not self.mouse_state_plus:
+                    self.mouse_state_plus = True
+                    if c.IT >= 10:
+                        c.IT += 10
+                    else:
+                        c.IT += 1
                 pyf.changeLabel(self.number_shuffler_label, str(c.IT))
+            else:
+                self.mouse_state_plus = False
+            # Decrementa Iteracoes
             if pyf.spriteClicked(self.minus):
-                c.IT -= 1
+                if not self.mouse_state_minus:
+                    self.mouse_state_minus = True
+                    if c.IT > 10:
+                        c.IT -= 10
+                    elif c.IT > 0:
+                        c.IT -= 1
                 pyf.changeLabel(self.number_shuffler_label, str(c.IT))
+            else:
+                self.mouse_state_minus = False
+            # Botao Shuffle
             if pyf.spriteClicked(self.shuffle_button): # ao clicar o sprite do shuffler chama o metodo para embaralhar
+                self.initial_position()
                 self.shuffler_method(c.IT)
 
         pyf.endWait()
@@ -130,6 +161,10 @@ class Game_Interface:
     def move_numbers(self, moves):
         for move in moves:
             self.change_position(move)
+
+    def text_objects(self, text, font, color_text):
+        text_surface = font.render(text, True, color_text)
+        return text_surface, text_surface.get_rect()
 
 game = Game_Interface()
 game.run()

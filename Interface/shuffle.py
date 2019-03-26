@@ -4,7 +4,12 @@ import random
 class Shuffle:
     def __init__(self):
         self.matrix = np.zeros((3,3))
-        self.zero_pos = [2,2]
+        self.zero_pos = []
+        self.moves_list = []
+        self.reset_shuffle_algorithm()
+
+    def reset_shuffle_algorithm(self):
+        self.zero_pos = [2, 2]
         self.moves_list = []
 
         self.matrix[0][0] = 1
@@ -18,6 +23,7 @@ class Shuffle:
         self.matrix[2][2] = 0
 
     def shuffle_algorithm(self, n_moves):
+        self.reset_shuffle_algorithm()
         for n in range (n_moves):
             self.moves_list.append(self.swap_positions(self.get_neighbors()))
 
