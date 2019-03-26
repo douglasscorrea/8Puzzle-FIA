@@ -19,7 +19,6 @@ YELLOW_B = (247, 241, 176)
 GREEN    = (144, 238, 144)
 BLUE     = (30, 144, 255)
 BLUE_B   = (0, 191, 255)
-
 GRAY   = (155, 155, 155)
 
 # Tempo tick
@@ -27,3 +26,11 @@ TIME_CONST = 0.000001
 
 # Numero iteracoes
 IT = 10
+
+FILENAME_STD = ""
+
+SPRITE_BORDER = 50
+IMAGE_SIZE = 200
+
+AREA = 600
+TRANSFORM_FACTOR_4 = 0.75
