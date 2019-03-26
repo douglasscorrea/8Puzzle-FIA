@@ -3,7 +3,6 @@ from pygame.locals import *
 import pygame_functions as pyf
 import constants as c
 import time
-import controls as co
 import shuffle
 
 
@@ -28,6 +27,12 @@ class Game_Interface:
         self.plus = pyf.makeSprite("images/plus.png")
         self.minus = pyf.makeSprite("images/minus.png")
         self.shuffle_button = pyf.makeSprite("images/shuffle.png")
+        self.BFS_button = pyf.makeSprite("images/BFS.png")
+        self.DFS_button = pyf.makeSprite("images/DFS.png")
+        self.BFS_IT_button = pyf.makeSprite("images/BFS_IT.png")
+        self.BFS_IT_button = pyf.makeSprite("images/BFS_IT.png")
+        self.A1_button = pyf.makeSprite("images/A_H1.png")
+        self.A2_button = pyf.makeSprite("images/A_H2.png")
         self.text_shuffler_label = pyf.makeLabel("Numero de iteracoes: ", 30, 50, 690, "black", "Arial", "clear")
         self.number_shuffler_label = pyf.makeLabel(str(c.IT), 30, 332, 692, "black", "Arial", "clear")
         self.spriteList = [n0, n1, n2, n3, n4, n5, n6, n7, n8]
@@ -44,6 +49,11 @@ class Game_Interface:
         pyf.moveSprite(self.shuffle_button, 490, 710, True)
         pyf.moveSprite(self.plus, 400, 710, True)
         pyf.moveSprite(self.minus, 440, 710, True)
+        pyf.moveSprite(self.BFS_button, 800, 100, True)
+        pyf.moveSprite(self.DFS_button, 1010, 100, True)
+        pyf.moveSprite(self.BFS_IT_button, 900, 210, True)
+        pyf.moveSprite(self.A1_button, 800, 320, True)
+        pyf.moveSprite(self.A2_button, 1010, 320, True)
         #pyf.transformSprite(self.shuffle_button, 0, 0.7)  Usar para tabuleiro maior que 3x3
 
         pyf.showSprite(self.spriteList[0])
@@ -60,6 +70,11 @@ class Game_Interface:
         pyf.showSprite(self.minus)
         pyf.showLabel(self.text_shuffler_label)
         pyf.showLabel(self.number_shuffler_label)
+        pyf.showLabel(self.BFS_button)
+        pyf.showLabel(self.DFS_button)
+        pyf.showLabel(self.BFS_IT_button)
+        pyf.showLabel(self.A1_button)
+        pyf.showLabel(self.A2_button)
         pyf.transformSprite(self.shuffle_button, 0, 0.35)
         pyf.transformSprite(self.plus, 0, 0.25)
         pyf.transformSprite(self.minus, 0, 0.25)
@@ -93,7 +108,11 @@ class Game_Interface:
             if pyf.spriteClicked(self.plus):
                 if not self.mouse_state_plus:
                     self.mouse_state_plus = True
-                    if c.IT >= 10:
+                    if c.IT >= 1000:
+                        c.IT += 1000
+                    elif c.IT >= 100:
+                        c.IT += 100
+                    elif c.IT >= 10:
                         c.IT += 10
                     else:
                         c.IT += 1
@@ -104,7 +123,11 @@ class Game_Interface:
             if pyf.spriteClicked(self.minus):
                 if not self.mouse_state_minus:
                     self.mouse_state_minus = True
-                    if c.IT > 10:
+                    if c.IT > 1000:
+                        c.IT -= 1000
+                    elif c.IT > 100:
+                        c.IT -= 100
+                    elif c.IT > 10:
                         c.IT -= 10
                     elif c.IT > 0:
                         c.IT -= 1
