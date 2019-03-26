@@ -24,3 +24,6 @@ GRAY   = (155, 155, 155)
 
 # Tempo tick
 TIME_CONST = 0.000001
+
+# Numero iteracoes
+IT = 10

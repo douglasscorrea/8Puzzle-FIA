@@ -50,7 +50,7 @@ class Shuffle:
         self.matrix[pos[0]][pos[1]] = 0
         aux = self.zero_pos
         self.zero_pos = [pos[0],pos[1]]
-        print(self.matrix[aux[0]][aux[1]])
+        #print(self.matrix[aux[0]][aux[1]])
         return int(self.matrix[aux[0]][aux[1]])
 
     def get_moves_list(self):

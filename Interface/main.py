@@ -12,6 +12,7 @@ class Game_Interface:
     def __init__(self):
         pyf.screenSize(c.SCREEN_WIDTH, c.SCREEN_HEIGHT)
         pyf.setBackgroundColour(c.GRAY)
+
         n0 = pyf.makeSprite("images/0.png")
         n1 = pyf.makeSprite("images/1.png")
         n2 = pyf.makeSprite("images/2.png")
@@ -22,7 +23,12 @@ class Game_Interface:
         n7 = pyf.makeSprite("images/7.png")
         n8 = pyf.makeSprite("images/8.png")
 
-        self.spriteList = [n0, n1,n2,n3,n4,n5,n6,n7,n8]
+        self.plus = pyf.makeSprite("images/plus.png")
+        self.minus = pyf.makeSprite("images/minus.png")
+        self.shuffle_button = pyf.makeSprite("images/shuffle.png")
+        self.text_shuffler_label = pyf.makeLabel("Numero de iteracoes: ", 30, 50, 690, "black", "Arial", "clear")
+        self.number_shuffler_label = pyf.makeLabel(str(c.IT), 30, 332, 692, "black", "Arial", "clear")
+        self.spriteList = [n0, n1, n2, n3, n4, n5, n6, n7, n8]
 
         pyf.moveSprite(self.spriteList[1], 150, 150, True)
         pyf.moveSprite(self.spriteList[2], 350, 150, True)
@@ -33,8 +39,10 @@ class Game_Interface:
         pyf.moveSprite(self.spriteList[7], 150, 550, True)
         pyf.moveSprite(self.spriteList[8], 350, 550, True)
         pyf.moveSprite(self.spriteList[0], 550, 550, True)
-
-        #pyf.transformSprite(n2, 0, 0.88)  Usar para tabuleiro maior que 3x3
+        pyf.moveSprite(self.shuffle_button, 490, 710, True)
+        pyf.moveSprite(self.plus, 400, 710, True)
+        pyf.moveSprite(self.minus, 440, 710, True)
+        #pyf.transformSprite(self.shuffle_button, 0, 0.7)  Usar para tabuleiro maior que 3x3
 
         pyf.showSprite(self.spriteList[0])
         pyf.showSprite(self.spriteList[1])
@@ -45,14 +53,45 @@ class Game_Interface:
         pyf.showSprite(self.spriteList[6])
         pyf.showSprite(self.spriteList[7])
         pyf.showSprite(self.spriteList[8])
+        pyf.showSprite(self.shuffle_button)
+        pyf.showSprite(self.plus)
+        pyf.showSprite(self.minus)
+        pyf.showLabel(self.text_shuffler_label)
+        pyf.showLabel(self.number_shuffler_label)
+        pyf.transformSprite(self.shuffle_button, 0, 0.35)
+        pyf.transformSprite(self.plus, 0, 0.25)
+        pyf.transformSprite(self.minus, 0, 0.25)
 
         self.shuffler = shuffle.Shuffle()
-        self.shuffler.shuffle_algorithm(1000)
-        moves_list = self.shuffler.get_moves_list()
-        print(moves_list)
-        self.movementTest(moves_list)
+
+    def run(self):
+        # RODA ATE A TECLA ESC SER PRESSIONADA
+        keys = pygame.key.get_pressed()
+        current_time = pygame.time.get_ticks()
+        waittime = 0
+        while not keys[pygame.K_ESCAPE]:
+            current_time = pygame.time.get_ticks()
+            if current_time > waittime:
+                pygame.event.clear()
+                keys = pygame.key.get_pressed()
+                waittime += 20
+
+            if pyf.spriteClicked(self.plus):
+                c.IT += 1
+                pyf.changeLabel(self.number_shuffler_label, str(c.IT))
+            if pyf.spriteClicked(self.minus):
+                c.IT -= 1
+                pyf.changeLabel(self.number_shuffler_label, str(c.IT))
+            if pyf.spriteClicked(self.shuffle_button): # ao clicar o sprite do shuffler chama o metodo para embaralhar
+                self.shuffler_method(c.IT)
 
         pyf.endWait()
+
+    def shuffler_method(self, n_moves):
+        print(c.IT)
+        self.shuffler.shuffle_algorithm(n_moves)
+        moves_list = self.shuffler.get_moves_list()
+        self.move_numbers(moves_list)
 
     def change_position(self, m): #m=n?
         n0_x, n0_y = self.spriteList[0].getPosition()
@@ -88,8 +127,9 @@ class Game_Interface:
                 pyf.moveSprite(self.spriteList[m], x_pos, y_pos, True)
                 time.sleep(c.TIME_CONST)
 
-    def movementTest(self, moves):
+    def move_numbers(self, moves):
         for move in moves:
             self.change_position(move)
 
 game = Game_Interface()
+game.run()
