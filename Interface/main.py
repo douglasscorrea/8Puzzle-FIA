@@ -12,15 +12,15 @@ class Game_Interface:
     def __init__(self):
         pyf.screenSize(c.SCREEN_WIDTH, c.SCREEN_HEIGHT)
         pyf.setBackgroundColour(c.GRAY)
-        n0 = pyf.makeSprite("/home/paulohenrik/GIT-repository/8Puzzle-FIA/Interface/images/0.png")
-        n1 = pyf.makeSprite("/home/paulohenrik/GIT-repository/8Puzzle-FIA/Interface/images/1.png")
-        n2 = pyf.makeSprite("/home/paulohenrik/GIT-repository/8Puzzle-FIA/Interface/images/2.png")
-        n3 = pyf.makeSprite("/home/paulohenrik/GIT-repository/8Puzzle-FIA/Interface/images/3.png")
-        n4 = pyf.makeSprite("/home/paulohenrik/GIT-repository/8Puzzle-FIA/Interface/images/4.png")
-        n5 = pyf.makeSprite("/home/paulohenrik/GIT-repository/8Puzzle-FIA/Interface/images/5.png")
-        n6 = pyf.makeSprite("/home/paulohenrik/GIT-repository/8Puzzle-FIA/Interface/images/6.png")
-        n7 = pyf.makeSprite("/home/paulohenrik/GIT-repository/8Puzzle-FIA/Interface/images/7.png")
-        n8 = pyf.makeSprite("/home/paulohenrik/GIT-repository/8Puzzle-FIA/Interface/images/8.png")
+        n0 = pyf.makeSprite("images/0.png")
+        n1 = pyf.makeSprite("images/1.png")
+        n2 = pyf.makeSprite("images/2.png")
+        n3 = pyf.makeSprite("images/3.png")
+        n4 = pyf.makeSprite("images/4.png")
+        n5 = pyf.makeSprite("images/5.png")
+        n6 = pyf.makeSprite("images/6.png")
+        n7 = pyf.makeSprite("images/7.png")
+        n8 = pyf.makeSprite("images/8.png")
 
         self.spriteList = [n0, n1,n2,n3,n4,n5,n6,n7,n8]
 
