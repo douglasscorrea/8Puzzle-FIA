@@ -1,8 +1,9 @@
 class Node():
-	def __init__(self, upper, value):
+	def __init__(self, upper, value, depth):
 		self.upper = upper
 		self.value = value
 		self.lowers = []
+		self.depth = depth
 
 	def get_lowers(self):
 		return self.lowers
@@ -21,3 +22,9 @@ class Node():
 
 	def get_value(self):
 		return self.value
+
+	def get_depth(self):
+		return self.depth
+
+	def set_depth(self, depth):
+		self.depth = depth
