@@ -4,19 +4,19 @@ import node
 import utils
 import copy
 
-sorted_matrix = np.zeros((3,3))
-sorted_matrix[0][0] = 1
-sorted_matrix[0][1] = 2
-sorted_matrix[0][2] = 3
-sorted_matrix[1][0] = 4
-sorted_matrix[1][1] = 5
-sorted_matrix[1][2] = 6
-sorted_matrix[2][0] = 7
-sorted_matrix[2][1] = 8
-sorted_matrix[2][2] = 0
+
 
 class BFS():
-	def __init__(self, matrix):
+	def __init__(self, matrix, board_size):
+		self.sorted_matrix = np.zeros((board_size, board_size))
+		
+		counter = 1
+		for i in range(0, board_size):
+			for j in range(0, board_size):
+				self.sorted_matrix[i][j] = counter
+				counter += 1
+		self.sorted_matrix[board_size - 1][board_size - 1] = 0
+		self.board_size = board_size
 		self.board = matrix
 		self.root = node.Node(0, -1, 0)
 		self.solution_path = []
@@ -31,7 +31,7 @@ class BFS():
 		curr_node = self.root
 
 		# Teste se o tabuleiro de entrada ja esta resolvido
-		if(not np.array_equal(sorted_matrix, self.board)):
+		if(not np.array_equal(self.sorted_matrix, self.board)):
 			# visited_board_node = [self.board, curr_node]
 			visited_boards = [self.board]
 			visited_nodes = [curr_node]
@@ -41,7 +41,7 @@ class BFS():
 		# Visita os nodos e coloca os filhos na lista de nao visitados
 		for visited_board in visited_boards:
 			# Salva os filhos do nodo atual
-			current_neighbors = utils.get_neighbors(visited_board, 3)
+			current_neighbors = utils.get_neighbors(visited_board, self.board_size)
 			curr_node = visited_nodes[counter]
 			counter += 1
 
@@ -57,7 +57,7 @@ class BFS():
 
 			# Visita os nodos ainda nao visitados
 			for not_visited in not_visited_boards:
-				if(not np.array_equal(sorted_matrix, not_visited)):
+				if(not np.array_equal(self.sorted_matrix, not_visited)):
 					# coloca not_visited no visited
 					visited_boards.append(not_visited)
 				else:
@@ -75,7 +75,7 @@ class BFS():
 
 	def get_last_movement(self, board):
 		indexes = np.where(board == 0)
-		return sorted_matrix[indexes[0][0]][indexes[1][0]]
+		return self.sorted_matrix[indexes[0][0]][indexes[1][0]]
 
 
 	def print_nodes(self, visited_nodes):
@@ -95,17 +95,17 @@ class BFS():
 		# print(self.board)
 		return self.solution_path		
 
-board = np.zeros((3,3))
-
-board[0][0] = 1
-board[0][1] = 2
-board[0][2] = 3
-board[1][0] = 4
-board[1][1] = 0
-board[1][2] = 6
-board[2][0] = 7
-board[2][1] = 5
-board[2][2] = 8	
-
-game = BFS(board)
-game.BFS_algorithm()
+# board = np.zeros((3,3))
+#
+# board[0][0] = 1
+# board[0][1] = 2
+# board[0][2] = 3
+# board[1][0] = 4
+# board[1][1] = 0
+# board[1][2] = 6
+# board[2][0] = 7
+# board[2][1] = 5
+# board[2][2] = 8
+#
+# game = BFS(board)
+# game.BFS_algorithm()

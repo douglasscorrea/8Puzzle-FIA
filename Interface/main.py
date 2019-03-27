@@ -5,6 +5,7 @@ import pygame_functions as pyf
 import constants as c
 import time
 import shuffle
+import bfs
 
 
 class Game_Interface:
@@ -13,6 +14,7 @@ class Game_Interface:
         self.nmax = nmax
         self.mouse_state_plus = False
         self.mouse_state_minus = False
+        #self.alg
         self.sprite_list = []
         self.shuffler = shuffle.Shuffle(self.nmax)
         self.imagesize = c.IMAGE_SIZE
@@ -138,16 +140,28 @@ class Game_Interface:
                 self.initial_position()
                 self.shuffler_method(c.IT)
 
+            # Botoes Algoritmos
+            move_list = []
+            # BFS
+            if pyf.spriteClicked(self.BFS_button):
+                bfs_alg = bfs.BFS(self.shuffler.get_matrix(), self.nmax)
+                bfs_alg.BFS_algorithm()
+                move_list = bfs_alg.get_solution_path()
+
+                print(move_list)
+                print(len(move_list))
+                self.move_numbers(move_list, True)
+
+
         pyf.endWait()
 
     def shuffler_method(self, n_moves):
         self.shuffler.shuffle_algorithm(n_moves)
         moves_list = self.shuffler.get_moves_list()
-        self.move_numbers(moves_list)
+        self.move_numbers(moves_list, False)
 
-    def change_position(self, m): #m=n?
+    def change_position(self, m, flag): #m=n?
         pos_correction = self.imagesize/2
-
         n0_x, n0_y = self.sprite_list[0].getPosition()  # X e Y do zero
         x_pos, y_pos = self.sprite_list[m].getPosition()  # X e Y da posicao que sera trocada com 0
         x_temp, y_temp = self.sprite_list[m].getPosition()  # Temporario
@@ -159,30 +173,45 @@ class Game_Interface:
         x_pos += pos_correction
 
         pyf.moveSprite(self.sprite_list[0], x_pos, y_pos, True) # muda posição do 0
-        if n0_y > y_temp:
-            for x in range(0, int(self.imagesize/5)):
-                y_pos += 5
-                pyf.moveSprite(self.sprite_list[m], x_pos, y_pos, True)
-                time.sleep(c.TIME_CONST)
-        elif n0_y < y_temp:
-            for x in range(0, int(self.imagesize/5)):
-                y_pos -= 5
-                pyf.moveSprite(self.sprite_list[m], x_pos, y_pos, True)
-                time.sleep(c.TIME_CONST)
-        elif n0_x > x_temp:
-            for x in range(0, int(self.imagesize/5)):
-                x_pos += 5
-                pyf.moveSprite(self.sprite_list[m], x_pos, y_pos, True)
-                time.sleep(c.TIME_CONST)
-        elif n0_x < x_temp:
-            for x in range(0, int(self.imagesize/5)):
-                x_pos -= 5
-                pyf.moveSprite(self.sprite_list[m], x_pos, y_pos, True)
-                time.sleep(c.TIME_CONST)
+        if flag:
+            if n0_y > y_temp:
+                for x in range(0, int(self.imagesize/5)):
+                    y_pos += 5
+                    pyf.moveSprite(self.sprite_list[m], x_pos, y_pos, True)
+                    if flag:
+                         time.sleep(c.TIME_CONST)
+            elif n0_y < y_temp:
+                for x in range(0, int(self.imagesize/5)):
+                    y_pos -= 5
+                    pyf.moveSprite(self.sprite_list[m], x_pos, y_pos, True)
+                    if flag:
+                        time.sleep(c.TIME_CONST)
+            elif n0_x > x_temp:
+                for x in range(0, int(self.imagesize/5)):
+                    x_pos += 5
+                    pyf.moveSprite(self.sprite_list[m], x_pos, y_pos, True)
+                    if flag:
+                        time.sleep(c.TIME_CONST)
+            elif n0_x < x_temp:
+                for x in range(0, int(self.imagesize/5)):
+                    x_pos -= 5
+                    pyf.moveSprite(self.sprite_list[m], x_pos, y_pos, True)
+                    if flag:
+                        time.sleep(c.TIME_CONST)
+        else:
+            if n0_y > y_temp:
+                pyf.moveSprite(self.sprite_list[m], x_pos, y_pos + self.imagesize, True)
+            elif n0_y < y_temp:
+                pyf.moveSprite(self.sprite_list[m], x_pos, y_pos - self.imagesize, True)
+            elif n0_x > x_temp:
+                pyf.moveSprite(self.sprite_list[m], x_pos + self.imagesize, y_pos, True)
+            else:
+                pyf.moveSprite(self.sprite_list[m], x_pos - self.imagesize, y_pos, True)
 
-    def move_numbers(self, moves):
+
+    def move_numbers(self, moves, flag):
         for move in moves:
-            self.change_position(move)
+            self.change_position(move, flag)
 
     def text_objects(self, text, font, color_text):
         text_surface = font.render(text, True, color_text)
@@ -190,6 +219,7 @@ class Game_Interface:
 
 
 
-#game = Game_Interface(3, c.FILENAME_STD)
-game = Game_Interface(3, c.FILENAME_MAT)
+game = Game_Interface(5, c.FILENAME_STD)
+#game = Game_Interface(3, c.FILENAME_MAT)
+
 game.run()

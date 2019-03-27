@@ -36,3 +36,6 @@ class Shuffle:
 
     def get_moves_list(self):
         return self.moves_list
+
+    def get_matrix(self):
+        return self.matrix

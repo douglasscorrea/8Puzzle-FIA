@@ -22,7 +22,8 @@ BLUE_B   = (0, 191, 255)
 GRAY   = (155, 155, 155)
 
 # Tempo tick
-TIME_CONST = 0.000001
+TIME_CONST = 0.00001
+MOVE_STRIDE = 200
 
 # Numero iteracoes
 IT = 10
