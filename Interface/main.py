@@ -1,12 +1,11 @@
 # -*- coding: utf-8 -*-
-
 import pygame, os, sys
 import pygame_functions as pyf
 import constants as c
 import time
 import shuffle
 import bfs
-
+import psutil
 
 class Game_Interface:
     def __init__(self, nmax, filename):
@@ -18,6 +17,7 @@ class Game_Interface:
         self.sprite_list = []
         self.shuffler = shuffle.Shuffle(self.nmax)
         self.imagesize = c.IMAGE_SIZE
+        self.time_elapsed = 0
 
         # Inicializacao Pygame
         pyf.screenSize(c.SCREEN_WIDTH, c.SCREEN_HEIGHT)
@@ -37,7 +37,11 @@ class Game_Interface:
         self.BFS_IT_button = pyf.makeSprite("images/BFS_IT.png")
         self.A1_button = pyf.makeSprite("images/A_H1.png")
         self.A2_button = pyf.makeSprite("images/A_H2.png")
-        self.text_shuffler_label = pyf.makeLabel("Numero de iteracoes: ", 30, 50, 690, "black", "Arial", "clear")
+        self.text_shuffler_label = pyf.makeLabel("Número de iterações: ", 30, 50, 690, "black", "Arial", "clear")
+        self.text_time = pyf.makeLabel("Tempo de execução: ", 30, 700, 400, "black", "Arial", "clear")
+        self.text_time2 = pyf.makeLabel("segundos", 30, 980, 400, "black", "Arial", "gray")
+        self.text_memory = pyf.makeLabel("Memória utilizada: ", 30, 735, 450, "black", "Arial", "clear")
+        self.text_memory2 = pyf.makeLabel("bytes", 30, 980, 450, "black", "Arial", "gray")
         self.number_shuffler_label = pyf.makeLabel(str(c.IT), 30, 332, 692, "black", "Arial", "clear")
 
         # Transforma sprites para tamanhos maiores que 3x3
@@ -46,9 +50,9 @@ class Game_Interface:
 
         # Posiciona Sprites
         self.initial_position()
-        pyf.moveSprite(self.shuffle_button, 520, 710, True)
-        pyf.moveSprite(self.plus, 465, 710, True)
-        pyf.moveSprite(self.minus, 410, 710, True)
+        pyf.moveSprite(self.shuffle_button, 570, 710, True)
+        pyf.moveSprite(self.plus, 515, 710, True)
+        pyf.moveSprite(self.minus, 460, 710, True)
         pyf.moveSprite(self.BFS_button, 800, 100, True)
         pyf.moveSprite(self.DFS_button, 1010, 100, True)
         pyf.moveSprite(self.BFS_IT_button, 900, 210, True)
@@ -68,6 +72,10 @@ class Game_Interface:
         pyf.showLabel(self.BFS_IT_button)
         pyf.showLabel(self.A1_button)
         pyf.showLabel(self.A2_button)
+        pyf.showLabel(self.text_time)
+        pyf.showLabel(self.text_time2)
+        pyf.showLabel(self.text_memory)
+        pyf.showLabel(self.text_memory2)
         pyf.transformSprite(self.shuffle_button, 0, 0.25)
         pyf.transformSprite(self.plus, 0, 0.25)
         pyf.transformSprite(self.minus, 0, 0.1)
@@ -145,7 +153,16 @@ class Game_Interface:
             # BFS
             if pyf.spriteClicked(self.BFS_button):
                 bfs_alg = bfs.BFS(self.shuffler.get_matrix(), self.nmax)
+                start = time.time()
                 bfs_alg.BFS_algorithm()
+                end = time.time()
+
+                if end - start < 1:
+                    pyf.changeLabel(self.text_time2, "{0:.3f}".format((end - start) * 1000) + "ms")
+                else:
+                    pyf.changeLabel(self.text_time2, "{0:.3f}".format(end - start) + "s")
+
+                pyf.changeLabel(self.text_memory2, "{0:.3f}".format(bfs_alg.get_memory_usage()) + "MB")
                 move_list = bfs_alg.get_solution_path()
                 self.move_numbers(move_list, True)
 
@@ -216,7 +233,7 @@ class Game_Interface:
 
 
 
-# game = Game_Interface(5, c.FILENAME_STD)
-game = Game_Interface(3, c.FILENAME_MAT)
+game = Game_Interface(4, c.FILENAME_STD)
+#game = Game_Interface(3, c.FILENAME_MAT)
 
 game.run()

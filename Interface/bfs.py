@@ -3,7 +3,7 @@ import numpy as np
 import node
 import utils
 import copy
-
+import sys
 
 
 class BFS():
@@ -17,6 +17,8 @@ class BFS():
 				counter += 1
 		self.sorted_matrix[board_size - 1][board_size - 1] = 0
 		self.board_size = board_size
+
+		self.memory_usage = 0
 		self.board = matrix
 		self.root = node.Node(0, -1, 0)
 		self.solution_path = []
@@ -36,7 +38,7 @@ class BFS():
 			visited_boards = [self.board]
 			visited_nodes = [curr_node]
 		else:
-			return return_path(curr_node)
+			return
 
 		# Visita os nodos e coloca os filhos na lista de nao visitados
 		for visited_board in visited_boards:
@@ -67,6 +69,7 @@ class BFS():
 					#print(not_visited)
 					#print('Completou puzzle')
 					self.solution_path = self.get_solution(new_node)
+					self.memory_usage = self.determine_memory_usage(visited_boards, visited_nodes)
 					#print
 					#print("Movimentos para completar: " + str(self.solution_path))
 					return
@@ -93,7 +96,13 @@ class BFS():
 
 	def get_solution_path(self):
 		# print(self.board)
-		return self.solution_path		
+		return self.solution_path
+
+	def determine_memory_usage(self, boards, nodes):
+		return (len(boards)*sys.getsizeof(boards[0]) + len(nodes)*sys.getsizeof(nodes[0]))/1048576
+
+	def get_memory_usage(self):
+		return self.memory_usage
 
 # board = np.zeros((3,3))
 #

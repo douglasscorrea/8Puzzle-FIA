@@ -1,4 +1,8 @@
 import numpy as np
+import time
+import threading
+import psutil
+import os
 
 def swap_position(board, indexes):
     zero_pos = find_ij(board)
