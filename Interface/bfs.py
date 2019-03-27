@@ -18,31 +18,9 @@ sorted_matrix[2][2] = 0
 class BFS():
 	def __init__(self, matrix):
 		self.board = matrix
-		self.root = node.Node(0, -1)
+		self.root = node.Node(0, -1, 0)
 		self.moves_list = self.BFS_algorithm()
-
-	# Retorna uma lista com os indices dos vizinhos [[i,j], [i,j], ...]
-	def get_neighbors(self, board):
-		if board[0][0] == 0:
-			return [[0,1],[1,0]]
-		elif board[0][1] == 0:
-			return [[0,0], [1,1],[0,2]]
-		elif board[0][2] == 0:
-			return [[0,1], [1,2]]
-		elif board[1][0] == 0:
-			return [[0,0], [1,1], [2,0]]
-		elif board[1][1] == 0:
-			return [[0,1], [1,2], [2,1], [1,0]]
-		elif board[1][2] == 0:
-			return [[0,2], [1,1], [2,2]]
-		elif board[2][0] == 0:
-			return [[1,0,], [2,1]]
-		elif board[2][1] == 0:
-			return [[2,0], [1,1], [2,2]]
-		elif board[2][2] == 0:
-			return [[2,1], [1,2]]
-		else:
-			print("Erro: 0 Nao Encontrado")
+	
 
     # Executa o algoritmo e retorna uma lista com os movimentos na arvore
 	def BFS_algorithm(self):
@@ -64,13 +42,13 @@ class BFS():
 		# Visita os nodos e coloca os filhos na lista de nao visitados
 		for visited_board in visited_boards:
 			# Salva os filhos do nodo atual
-			current_neighbors = self.get_neighbors(visited_board)
+			current_neighbors = utils.get_neighbors(visited_board, 3)
 			curr_node = visited_nodes[counter]
 			counter += 1
 
 			# Coloca os filhos na lista de nao visitados
 			for neighbor in current_neighbors:
-				new_node = node.Node(curr_node, visited_board[neighbor[0]][neighbor[1]])
+				new_node = node.Node(curr_node, visited_board[neighbor[0]][neighbor[1]], 0)
 
 				# se o pai e o filho representam movimentos distintos
 				if(new_node.get_value() != new_node.get_upper().get_value()):
@@ -84,7 +62,7 @@ class BFS():
 					# coloca not_visited no visited
 					visited_boards.append(not_visited)
 				else:
-					new_node = node.Node(curr_node, self.get_last_movement(visited_board))
+					new_node = node.Node(curr_node, self.get_last_movement(visited_board), 0)
 					visited_nodes.append(new_node)
 					print("Tabuleiro final")
 					print(not_visited)
@@ -119,8 +97,8 @@ board = np.zeros((3,3))
 board[0][0] = 1
 board[0][1] = 2
 board[0][2] = 3
-board[1][0] = 0
-board[1][1] = 4
+board[1][0] = 4
+board[1][1] = 0
 board[1][2] = 6
 board[2][0] = 7
 board[2][1] = 5
