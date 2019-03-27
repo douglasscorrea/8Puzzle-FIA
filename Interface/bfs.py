@@ -92,7 +92,7 @@ class BFS():
 		return list(reversed(solution))
 
 	def get_solution_path(self):
-		print(self.board)
+		# print(self.board)
 		return self.solution_path		
 
 board = np.zeros((3,3))
