@@ -19,8 +19,7 @@ class BFS():
 	def __init__(self, matrix):
 		self.board = matrix
 		self.root = node.Node(0, -1, 0)
-		self.moves_list = self.BFS_algorithm()
-		self.solution_path =[]
+		self.solution_path = []
 
     # Executa o algoritmo e retorna uma lista com os movimentos na arvore
 	def BFS_algorithm(self):
@@ -93,7 +92,8 @@ class BFS():
 		return list(reversed(solution))
 
 	def get_solution_path(self):
-		return self.solution_path			
+		print(self.board)
+		return self.solution_path		
 
 board = np.zeros((3,3))
 
@@ -108,11 +108,4 @@ board[2][1] = 5
 board[2][2] = 8	
 
 game = BFS(board)
-
-
-
-
-
-
-
-
+game.BFS_algorithm()
