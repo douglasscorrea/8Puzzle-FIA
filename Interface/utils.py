@@ -1,13 +1,22 @@
 import numpy as np
 
 def swap_position(board, indexes):
-    zero_pos = np.where(board == 0)
+    # print("SWAP")
+    # print board
+    zero_pos = find_ij(board)
 
-    board[zero_pos] = board[indexes]
-    board[indexes] = 0
+    # print board
+    # print zero_pos
+    # print indexes
 
-    new_board = board
-    return new_board
+    board[zero_pos[0]][zero_pos[1]] = board[indexes[0]][indexes[1]]
+    board[indexes[0]][indexes[1]] = 0
+
+    # print board
+    # print(board)
+    # print()
+
+    return board
 
 
 # Retorna uma Lista com os possiveis vizinhos do 0
@@ -30,3 +39,10 @@ def get_neighbors(board, nmax):
         neighbors_list.append([i,j+1])
 
     return neighbors_list
+
+def find_ij(board):
+
+    for i in range(0, np.shape(board)[0]):
+        for j in range(0, np.shape(board)[1]):
+            if board[i][j] == 0:
+                return [i,j]
