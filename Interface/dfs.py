@@ -29,11 +29,12 @@ class DFS():
 				self.soreted_matrix[i][j] = 0
 				counter += 1
 
+		self.solution_path = []
 		self.soreted_matrix[board_size - 1][board_size - 1] = 0
 		self.board_size = board_size
 		self.board = matrix
 		self.root = node.Node(0, -1, 0)
-		self.moves_list = self.DFS_algorithm()
+
 
 	def DFS_algorithm(self):
 
@@ -50,7 +51,7 @@ class DFS():
 			visited_boards = [self.board]
 			visited_nodes = [curr_node]
 		else:
-			return return_path(curr_node)
+			return
 
 		# Visita os nodos e coloca os filhos na lista de nao visitados
 		while visited_boards:
@@ -91,9 +92,9 @@ class DFS():
 						print("Tabuleiro final")
 						print(not_visited)
 						#print('Completou puzzle')
-						solution_path = self.get_solution(new_node)
+						self.solution_path = self.get_solution(new_node)
 
-						return solution_path
+						return
 					curr_node = new_node
 
 		not_visited_boards = []
@@ -115,17 +116,3 @@ class DFS():
 		print(self.board)
 		return self.solution_path		
 
-board = np.zeros((3,3))
-
-board[0][0] = 4
-board[0][1] = 2
-board[0][2] = 6
-board[1][0] = 5
-board[1][1] = 3
-board[1][2] = 8
-board[2][0] = 1
-board[2][1] = 7
-board[2][2] = 0	
-
-game = DFS(board, 3)
-game.DFS_algorithm()

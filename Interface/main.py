@@ -5,6 +5,7 @@ import constants as c
 import time
 import shuffle
 import bfs
+import dfs
 import psutil
 
 class Game_Interface:
@@ -34,13 +35,14 @@ class Game_Interface:
         self.BFS_button = pyf.makeSprite("images/BFS.png")
         self.DFS_button = pyf.makeSprite("images/DFS.png")
         self.BFS_IT_button = pyf.makeSprite("images/BFS_IT.png")
-        self.BFS_IT_button = pyf.makeSprite("images/BFS_IT.png")
         self.A1_button = pyf.makeSprite("images/A_H1.png")
         self.A2_button = pyf.makeSprite("images/A_H2.png")
         self.text_shuffler_label = pyf.makeLabel("Número de iterações: ", 30, 50, 690, "black", "Arial", "clear")
         self.text_time = pyf.makeLabel("Tempo de execução: ", 30, 700, 400, "black", "Arial", "clear")
         self.text_time2 = pyf.makeLabel("segundos", 30, 980, 400, "black", "Arial", "gray")
         self.text_memory = pyf.makeLabel("Memória utilizada: ", 30, 735, 450, "black", "Arial", "clear")
+        self.text_moves = pyf.makeLabel("Movimentos Realizados: ", 30, 735, 500, "black", "Arial", "clear")
+        self.text_moves2 = pyf.makeLabel("", 30, 735, 500, "black", "Arial", "gray")
         self.text_memory2 = pyf.makeLabel("bytes", 30, 980, 450, "black", "Arial", "gray")
         self.number_shuffler_label = pyf.makeLabel(str(c.IT), 30, 332, 692, "black", "Arial", "clear")
 
@@ -76,6 +78,8 @@ class Game_Interface:
         pyf.showLabel(self.text_time2)
         pyf.showLabel(self.text_memory)
         pyf.showLabel(self.text_memory2)
+        pyf.showLabel(self.text_moves)
+        pyf.showLabel(self.text_moves2)
         pyf.transformSprite(self.shuffle_button, 0, 0.25)
         pyf.transformSprite(self.plus, 0, 0.25)
         pyf.transformSprite(self.minus, 0, 0.1)
@@ -166,6 +170,23 @@ class Game_Interface:
                 move_list = bfs_alg.get_solution_path()
                 self.move_numbers(move_list, True)
 
+            if pyf.spriteClicked(self.DFS_button):
+                print("profundo")
+                dfs_alg = dfs.DFS(self.shuffler.get_matrix(), self.nmax)
+                start = time.time()
+                dfs_alg.DFS_algorithm()
+                end = time.time()
+
+                if end - start < 1:
+                    pyf.changeLabel(self.text_time2, "{0:.3f}".format((end - start) * 1000) + "ms")
+                else:
+                    pyf.changeLabel(self.text_time2, "{0:.3f}".format(end - start) + "s")
+
+                #pyf.changeLabel(self.text_memory2, "{0:.3f}".format(bfs_alg.get_memory_usage()) + "MB")
+                move_list = dfs_alg.get_solution_path()
+                print(len(move_list))
+                self.move_numbers(move_list, False)
+
 
         pyf.endWait()
 
@@ -233,7 +254,7 @@ class Game_Interface:
 
 
 
-game = Game_Interface(4, c.FILENAME_STD)
-#game = Game_Interface(3, c.FILENAME_MAT)
+#game = Game_Interface(4, c.FILENAME_STD)
+game = Game_Interface(3, c.FILENAME_MAT)
 
 game.run()
