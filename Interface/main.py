@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import pygame, os, sys
 import pygame_functions as pyf
 import constants as c
