@@ -1,8 +1,7 @@
 import numpy as np
 import time
-import threading
-import psutil
 import os
+from random import shuffle
 
 def swap_position(board, indexes):
     zero_pos = find_ij(board)
