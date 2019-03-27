@@ -20,7 +20,7 @@ class BFS():
 		self.board = matrix
 		self.root = node.Node(0, -1, 0)
 		self.moves_list = self.BFS_algorithm()
-	
+		self.solution_path =[]
 
     # Executa o algoritmo e retorna uma lista com os movimentos na arvore
 	def BFS_algorithm(self):
@@ -64,13 +64,13 @@ class BFS():
 				else:
 					new_node = node.Node(curr_node, self.get_last_movement(visited_board), 0)
 					visited_nodes.append(new_node)
-					print("Tabuleiro final")
-					print(not_visited)
+					#print("Tabuleiro final")
+					#print(not_visited)
 					#print('Completou puzzle')
-					solution_path = self.get_solution(new_node)
-					print
-					print("Movimentos para completar: " + str(solution_path))
-					return solution_path
+					self.solution_path = self.get_solution(new_node)
+					#print
+					#print("Movimentos para completar: " + str(self.solution_path))
+					return
 
 			not_visited_boards = []
 
@@ -90,7 +90,10 @@ class BFS():
 			solution.append(int(curr_node.get_value()))
 			#print(curr_node.get_value())
 			curr_node = curr_node.get_upper()
-		return list(reversed(solution))			
+		return list(reversed(solution))
+
+	def get_solution_path(self):
+		return self.solution_path			
 
 board = np.zeros((3,3))
 
