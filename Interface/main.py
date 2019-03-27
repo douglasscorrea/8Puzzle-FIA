@@ -190,5 +190,6 @@ class Game_Interface:
 
 
 
-game = Game_Interface(4, c.FILENAME_STD)
+#game = Game_Interface(3, c.FILENAME_STD)
+game = Game_Interface(3, c.FILENAME_MAT)
 game.run()
