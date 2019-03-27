@@ -1,20 +1,10 @@
 import numpy as np
 
 def swap_position(board, indexes):
-    # print("SWAP")
-    # print board
     zero_pos = find_ij(board)
-
-    # print board
-    # print zero_pos
-    # print indexes
 
     board[zero_pos[0]][zero_pos[1]] = board[indexes[0]][indexes[1]]
     board[indexes[0]][indexes[1]] = 0
-
-    # print board
-    # print(board)
-    # print()
 
     return board
 
@@ -41,7 +31,6 @@ def get_neighbors(board, nmax):
     return neighbors_list
 
 def find_ij(board):
-
     for i in range(0, np.shape(board)[0]):
         for j in range(0, np.shape(board)[1]):
             if board[i][j] == 0:

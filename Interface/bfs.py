@@ -4,7 +4,6 @@ import node
 import utils
 import copy
 
-
 sorted_matrix = np.zeros((3,3))
 sorted_matrix[0][0] = 1
 sorted_matrix[0][1] = 2
@@ -16,16 +15,12 @@ sorted_matrix[2][0] = 7
 sorted_matrix[2][1] = 8
 sorted_matrix[2][2] = 0
 
-# 1 3 8
-# 7 0 6
-# 2 5 4
-
 class BFS():
 	def __init__(self, matrix):
 		self.board = matrix
 		self.root = node.Node(0, -1)
 		self.moves_list = self.BFS_algorithm()
-	
+
 	# Retorna uma lista com os indices dos vizinhos [[i,j], [i,j], ...]
 	def get_neighbors(self, board):
 		if board[0][0] == 0:
@@ -55,8 +50,7 @@ class BFS():
 		visited_boards = []
 		not_visited_boards = []
 		visited_nodes = []
-		# print(self.board)
-		# print()
+		counter = 0
 		curr_node = self.root
 
 		# Teste se o tabuleiro de entrada ja esta resolvido
@@ -67,82 +61,73 @@ class BFS():
 		else:
 			return return_path(curr_node)
 
-		# print(visited_boards)
-
 		# Visita os nodos e coloca os filhos na lista de nao visitados
-		# for visited, curr_node in visited_boards, visited_nodes:
-		
-		# for (visited_board, visited_node) in zip(visited_boards, visited_nodes):
 		for visited_board in visited_boards:
-			# print("VISITED BOARD")
-			# print(visited_board)
-			# print
 			# Salva os filhos do nodo atual
 			current_neighbors = self.get_neighbors(visited_board)
-			# print("CURRENT NEIGHBORS")
-			# print current_neighbors
-			# print
-			# print(current_neighbors)
+			curr_node = visited_nodes[counter]
+			counter += 1
+
 			# Coloca os filhos na lista de nao visitados
 			for neighbor in current_neighbors:
-				not_visited_boards.append(utils.swap_position(copy.copy(visited_board), neighbor))
-			# print(not_visited_boards)
+				new_node = node.Node(curr_node, visited_board[neighbor[0]][neighbor[1]])
+
+				# se o pai e o filho representam movimentos distintos
+				if(new_node.get_value() != new_node.get_upper().get_value()):
+					visited_nodes.append(new_node)
+					not_visited_boards.append(utils.swap_position(copy.copy(visited_board), neighbor))
+					curr_node.append_lower(new_node)
+
 			# Visita os nodos ainda nao visitados
 			for not_visited in not_visited_boards:
-				# print("NOT VISITED")
-				# print(not_visited)
-				# print
 				if(not np.array_equal(sorted_matrix, not_visited)):
 					# coloca not_visited no visited
-
-					# print visited_boards
 					visited_boards.append(not_visited)
-					new_node = node.Node(curr_node, not_visited[neighbor[0]][neighbor[1]])
-					# print(new_node.get_value())
-					curr_node.append_lower(new_node)
-					visited_nodes.append(new_node)
-
-
 				else:
-					print not_visited
-					print('Completou puzzle')
-					return
-					#return return_path(curr_node)
+					new_node = node.Node(curr_node, self.get_last_movement(visited_board))
+					visited_nodes.append(new_node)
+					print("Tabuleiro final")
+					print(not_visited)
+					#print('Completou puzzle')
+					solution_path = self.get_solution(new_node)
+					print
+					print("Movimentos para completar: " + str(solution_path))
+					return solution_path
 
 			not_visited_boards = []
-		# for nodes in visited_nodes:
-			# print(nodes.get_value())
-		# print
 
-		# for b in visited_boards:
-		# 	print(b)
+	def get_last_movement(self, board):
+		indexes = np.where(board == 0)
+		return sorted_matrix[indexes[0][0]][indexes[1][0]]
 
-	def return_path(self, node):
-		curr_node = node
-		path = []
 
-		while curr_node.get_value() != -1:
-			path.append(curr_node.get_value())
+	def print_nodes(self, visited_nodes):
+		for nodo in visited_nodes:
+			print('Value: ' + str(nodo.get_value()))
+
+
+	def get_solution(self, curr_node):
+		solution = []
+		while(curr_node.get_value() != -1):
+			solution.append(int(curr_node.get_value()))
+			#print(curr_node.get_value())
 			curr_node = curr_node.get_upper()
-
-		return path
-
+		return list(reversed(solution))			
 
 board = np.zeros((3,3))
 
-board[0][0] = 0
-board[0][1] = 3
-board[0][2] = 7
-board[1][0] = 4
-board[1][1] = 8
+board[0][0] = 1
+board[0][1] = 2
+board[0][2] = 3
+board[1][0] = 0
+board[1][1] = 4
 board[1][2] = 6
-board[2][0] = 5
-board[2][1] = 1
-board[2][2] = 2	
+board[2][0] = 7
+board[2][1] = 5
+board[2][2] = 8	
 
 game = BFS(board)
 
-#print(game.BFS_algorithm())
 
 
 
