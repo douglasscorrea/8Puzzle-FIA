@@ -46,9 +46,9 @@ class Game_Interface:
 
         # Posiciona Sprites
         self.initial_position()
-        pyf.moveSprite(self.shuffle_button, 490, 710, True)
-        pyf.moveSprite(self.plus, 400, 710, True)
-        pyf.moveSprite(self.minus, 440, 710, True)
+        pyf.moveSprite(self.shuffle_button, 520, 710, True)
+        pyf.moveSprite(self.plus, 465, 710, True)
+        pyf.moveSprite(self.minus, 410, 710, True)
         pyf.moveSprite(self.BFS_button, 800, 100, True)
         pyf.moveSprite(self.DFS_button, 1010, 100, True)
         pyf.moveSprite(self.BFS_IT_button, 900, 210, True)
@@ -68,9 +68,9 @@ class Game_Interface:
         pyf.showLabel(self.BFS_IT_button)
         pyf.showLabel(self.A1_button)
         pyf.showLabel(self.A2_button)
-        pyf.transformSprite(self.shuffle_button, 0, 0.35)
+        pyf.transformSprite(self.shuffle_button, 0, 0.25)
         pyf.transformSprite(self.plus, 0, 0.25)
-        pyf.transformSprite(self.minus, 0, 0.25)
+        pyf.transformSprite(self.minus, 0, 0.1)
 
 
     def initial_position(self):
@@ -147,9 +147,6 @@ class Game_Interface:
                 bfs_alg = bfs.BFS(self.shuffler.get_matrix(), self.nmax)
                 bfs_alg.BFS_algorithm()
                 move_list = bfs_alg.get_solution_path()
-
-                print(move_list)
-                print(len(move_list))
                 self.move_numbers(move_list, True)
 
 
@@ -219,7 +216,7 @@ class Game_Interface:
 
 
 
-game = Game_Interface(5, c.FILENAME_STD)
-#game = Game_Interface(3, c.FILENAME_MAT)
+# game = Game_Interface(5, c.FILENAME_STD)
+game = Game_Interface(3, c.FILENAME_MAT)
 
 game.run()
