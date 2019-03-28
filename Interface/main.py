@@ -181,11 +181,10 @@ class Game_Interface:
                 else:
                     pyf.changeLabel(self.text_time2, "{0:.3f}".format(end - start) + "s")
 
-                #pyf.changeLabel(self.text_memory2, "{0:.3f}".format(bfs_alg.get_memory_usage()) + "MB")
+                pyf.changeLabel(self.text_memory2, "{0:.0f}".format(dfs_alg.get_memory_usage()) + "bytes")
                 move_list = dfs_alg.get_solution_path()
                 print(len(move_list))
-                self.move_numbers(move_list, False)
-
+                self.move_numbers(move_list, True)
 
         pyf.endWait()
 
