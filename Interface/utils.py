@@ -98,3 +98,11 @@ def diff_heuristic(board, n):
             if board[i][j] != sorted[i][j]:
                 diff_itens += 1
     return diff_itens
+
+
+def get_solution(curr_node):
+    solution = []
+    while (curr_node.get_value() != -1):
+        solution.append(int(curr_node.get_value()))
+        curr_node = curr_node.get_upper()
+    return list(reversed(solution))
