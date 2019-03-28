@@ -26,7 +26,8 @@ class A_STAR():
                 new_board = utils.swap_position(copy.copy(curr_node.get_board()), neighbor)
                 new_node = node.Node(curr_node, curr_node.get_board()[neighbor[0]][neighbor[1]], curr_node.get_depth()+1, new_board)
                 new_node.set_h_cost(f(new_node.get_board(), self.board_size))
-                open_nodes.append(new_node)
+                if(new_node.get_value() != new_node.get_upper().get_value()):
+                    open_nodes.append(new_node)
 
 
     # @param nodes = lista de nos abertos
@@ -48,15 +49,15 @@ class A_STAR():
         return self.solution_path
 
 matrix = np.zeros((3, 3))
-matrix[0][0] = 1
-matrix[0][1] = 2
-matrix[0][2] = 3
+matrix[0][0] = 0
+matrix[0][1] = 6
+matrix[0][2] = 7
 matrix[1][0] = 4
-matrix[1][1] = 0
-matrix[1][2] = 6
-matrix[2][0] = 7
-matrix[2][1] = 5
-matrix[2][2] = 8
+matrix[1][1] = 8
+matrix[1][2] = 1
+matrix[2][0] = 5
+matrix[2][1] = 3
+matrix[2][2] = 2
 teste = A_STAR(matrix, 3)
 teste.a_star_algorithm(utils.diff_heuristic)
 print(teste.get_solution_path())
