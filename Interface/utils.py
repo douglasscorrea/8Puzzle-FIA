@@ -76,3 +76,25 @@ def create_sorted_matrix(n):
             count += 1
     matrix[n-1][n-1] = 0
     return matrix
+
+# @param board = matriz
+# @param n = dimensao da matriz
+# @return
+def manhattan_heuristic(board, n):
+    sorted = create_sorted_matrix(n)
+
+    for i in range(0, n):
+        for j in range(0, n):
+            pass
+
+
+# @param board = matriz
+# @param n = dimensao da matriz
+def diff_heuristic(board, n):
+    sorted = create_sorted_matrix(n)
+    diff_itens = 0
+    for i in range(0, n):
+        for j in range(0, n):
+            if board[i][j] != sorted[i][j]:
+                diff_itens += 1
+    return diff_itens
