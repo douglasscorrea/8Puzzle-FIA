@@ -33,6 +33,7 @@ def get_neighbors(board, nmax):
 
     return neighbors_list
 
+
 # Retorna uma Lista com os possiveis vizinhos do 0, em ordem embaralhada
 def get_random_neighbors(board, nmax):
     zero_pos = []
@@ -56,8 +57,22 @@ def get_random_neighbors(board, nmax):
 
     return neighbors_list
 
+
 def find_ij(board):
     for i in range(0, np.shape(board)[0]):
         for j in range(0, np.shape(board)[1]):
             if board[i][j] == 0:
                 return [i,j]
+
+
+# @param n = dimensao da matriz nxn
+# Retorna a matriz correta
+def create_sorted_matrix(n):
+    matrix = np.zeros((n, n))
+    count = 1
+    for i in range(0, n):
+        for j in range(0, n):
+            matrix[i][j] = count
+            count += 1
+    matrix[n-1][n-1] = 0
+    return matrix
