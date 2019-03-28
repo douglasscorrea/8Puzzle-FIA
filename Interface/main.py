@@ -171,7 +171,6 @@ class Game_Interface:
                 self.move_numbers(move_list, True)
 
             if pyf.spriteClicked(self.DFS_button):
-                print("profundo")
                 dfs_alg = dfs.DFS(self.shuffler.get_matrix(), self.nmax)
                 start = time.time()
                 dfs_alg.DFS_algorithm()
