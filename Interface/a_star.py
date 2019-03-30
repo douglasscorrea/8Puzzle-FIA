@@ -3,6 +3,7 @@ import node
 import utils
 import copy
 
+
 class A_STAR():
     def __init__(self, matrix, board_size):
         self.board = matrix  # Matriz de entrada
@@ -11,6 +12,7 @@ class A_STAR():
         self.root = node.Node(0, -1, 0, self.board)  # No raiz
         self.solution_path = None # Caminho da solucao
 
+    # @param f Heuristica que sera utilizada nos calculos
     def a_star_algorithm(self, f):
         open_nodes = [self.root]
 
@@ -26,7 +28,7 @@ class A_STAR():
                 new_board = utils.swap_position(copy.copy(curr_node.get_board()), neighbor)
                 new_node = node.Node(curr_node, curr_node.get_board()[neighbor[0]][neighbor[1]], curr_node.get_depth()+1, new_board)
                 new_node.set_h_cost(f(new_node.get_board(), self.board_size))
-                if(new_node.get_value() != new_node.get_upper().get_value()):
+                if new_node.get_value() != new_node.get_upper().get_value():
                     open_nodes.append(new_node)
 
 
@@ -44,11 +46,10 @@ class A_STAR():
         del(nodes[minor_index])
         return minor_node
 
-
     def get_solution_path(self):
         return self.solution_path
 
-matrix = np.zeros((3, 3))
+'''matrix = np.zeros((3, 3))
 matrix[0][0] = 0
 matrix[0][1] = 6
 matrix[0][2] = 7
@@ -60,4 +61,4 @@ matrix[2][1] = 3
 matrix[2][2] = 2
 teste = A_STAR(matrix, 3)
 teste.a_star_algorithm(utils.diff_heuristic)
-print(teste.get_solution_path())
+print(teste.get_solution_path())'''

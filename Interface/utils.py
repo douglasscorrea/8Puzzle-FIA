@@ -82,10 +82,14 @@ def create_sorted_matrix(n):
 # @return
 def manhattan_heuristic(board, n):
     sorted = create_sorted_matrix(n)
-
+    count = 0
     for i in range(0, n):
         for j in range(0, n):
-            pass
+            temp = board[i][j]
+            for k in range(0, n):
+                for l in range(0, n):
+                    if board[i][j] == sorted[k][l]:
+                        count += abs(k-i) + abs(l-j)
 
 
 # @param board = matriz

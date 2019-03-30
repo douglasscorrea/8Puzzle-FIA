@@ -6,6 +6,8 @@ import time
 import shuffle
 import bfs
 import dfs
+import a_star
+import utils
 import psutil
 
 class Game_Interface:
@@ -154,6 +156,7 @@ class Game_Interface:
 
             # Botoes Algoritmos
             move_list = []
+
             # BFS
             if pyf.spriteClicked(self.BFS_button):
                 bfs_alg = bfs.BFS(self.shuffler.get_matrix(), self.nmax)
@@ -170,6 +173,7 @@ class Game_Interface:
                 move_list = bfs_alg.get_solution_path()
                 self.move_numbers(move_list, True)
 
+            # DFS
             if pyf.spriteClicked(self.DFS_button):
                 dfs_alg = dfs.DFS(self.shuffler.get_matrix(), self.nmax)
                 start = time.time()
@@ -183,7 +187,38 @@ class Game_Interface:
 
                 pyf.changeLabel(self.text_memory2, "{0:.0f}".format(dfs_alg.get_memory_usage()) + "bytes")
                 move_list = dfs_alg.get_solution_path()
-                print(len(move_list))
+                self.move_numbers(move_list, True)
+
+            # A_STAR H1
+            if pyf.spriteClicked(self.A1_button):
+                astar_alg = a_star.A_STAR(self.shuffler.get_matrix(), self.nmax)
+                start = time.time()
+                astar_alg.a_star_algorithm(utils.diff_heuristic)
+                end = time.time()
+
+                if end - start < 1:
+                    pyf.changeLabel(self.text_time2, "{0:.3f}".format((end - start) * 1000) + "ms")
+                else:
+                    pyf.changeLabel(self.text_time2, "{0:.3f}".format(end - start) + "s")
+
+                #pyf.changeLabel(self.text_memory2, "{0:.0f}".format(dfs_alg.get_memory_usage()) + "bytes")
+                move_list = astar_alg.get_solution_path()
+                self.move_numbers(move_list, True)
+
+            # A_STAR H2
+            if pyf.spriteClicked(self.A2_button):
+                astar_alg = a_star.A_STAR(self.shuffler.get_matrix(), self.nmax)
+                start = time.time()
+                astar_alg.a_star_algorithm(utils.manhattan_heuristic)
+                end = time.time()
+
+                if end - start < 1:
+                    pyf.changeLabel(self.text_time2, "{0:.3f}".format((end - start) * 1000) + "ms")
+                else:
+                    pyf.changeLabel(self.text_time2, "{0:.3f}".format(end - start) + "s")
+
+                # pyf.changeLabel(self.text_memory2, "{0:.0f}".format(dfs_alg.get_memory_usage()) + "bytes")
+                move_list = astar_alg.get_solution_path()
                 self.move_numbers(move_list, True)
 
         pyf.endWait()
@@ -252,7 +287,7 @@ class Game_Interface:
 
 
 
-#game = Game_Interface(4, c.FILENAME_STD)
+#game = Game_Interface(5, c.FILENAME_STD)
 game = Game_Interface(3, c.FILENAME_MAT)
 
 game.run()
