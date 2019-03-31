@@ -90,6 +90,7 @@ def manhattan_heuristic(board, n):
                 for l in range(0, n):
                     if board[i][j] == sorted[k][l]:
                         count += abs(k-i) + abs(l-j)
+    return count
 
 
 # @param board = matriz
