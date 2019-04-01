@@ -8,7 +8,6 @@ import bfs
 import dfs
 import a_star
 import utils
-import psutil
 
 class Game_Interface:
     def __init__(self, nmax, filename):
@@ -39,12 +38,12 @@ class Game_Interface:
         self.BFS_IT_button = pyf.makeSprite("images/BFS_IT.png")
         self.A1_button = pyf.makeSprite("images/A_H1.png")
         self.A2_button = pyf.makeSprite("images/A_H2.png")
-        self.text_shuffler_label = pyf.makeLabel("Número de iterações: ", 30, 50, 690, "black", "Arial", "clear")
-        self.text_time = pyf.makeLabel("Tempo de execução: ", 30, 700, 400, "black", "Arial", "clear")
+        self.text_shuffler_label = pyf.makeLabel(u"Número de iterações: ", 30, 50, 690, "black", "Arial", "clear")
+        self.text_time = pyf.makeLabel(u"Tempo de execução: ", 30, 700, 400, "black", "Arial", "clear")
         self.text_time2 = pyf.makeLabel("segundos", 30, 980, 400, "black", "Arial", "gray")
-        self.text_memory = pyf.makeLabel("Memória utilizada: ", 30, 735, 450, "black", "Arial", "clear")
-        self.text_moves = pyf.makeLabel("Movimentos Realizados: ", 30, 735, 500, "black", "Arial", "clear")
-        self.text_moves2 = pyf.makeLabel("", 30, 735, 500, "black", "Arial", "gray")
+        self.text_memory = pyf.makeLabel(u"Memória utilizada: ", 30, 735, 450, "black", "Arial", "clear")
+        #self.text_moves = pyf.makeLabel("Movimentos Realizados: ", 30, 735, 500, "black", "Arial", "clear")
+        #self.text_moves2 = pyf.makeLabel("", 30, 735, 500, "black", "Arial", "gray")
         self.text_memory2 = pyf.makeLabel("bytes", 30, 980, 450, "black", "Arial", "gray")
         self.number_shuffler_label = pyf.makeLabel(str(c.IT), 30, 332, 692, "black", "Arial", "clear")
 
@@ -80,8 +79,8 @@ class Game_Interface:
         pyf.showLabel(self.text_time2)
         pyf.showLabel(self.text_memory)
         pyf.showLabel(self.text_memory2)
-        pyf.showLabel(self.text_moves)
-        pyf.showLabel(self.text_moves2)
+        #pyf.showLabel(self.text_moves)
+        #pyf.showLabel(self.text_moves2)
         pyf.transformSprite(self.shuffle_button, 0, 0.25)
         pyf.transformSprite(self.plus, 0, 0.25)
         pyf.transformSprite(self.minus, 0, 0.1)
