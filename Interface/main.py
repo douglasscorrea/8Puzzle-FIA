@@ -223,7 +223,7 @@ class Game_Interface:
                 else:
                     pyf.changeLabel(self.text_time2, "{0:.3f}".format(end - start) + "s")
 
-                #pyf.changeLabel(self.text_memory2, "{0:.0f}".format(dfs_alg.get_memory_usage()) + "bytes")
+                pyf.changeLabel(self.text_memory2, "{0:.0f}".format(astar_alg.get_memory_usage()) + "bytes")
                 move_list = astar_alg.get_solution_path()
                 self.move_numbers(move_list, True)
                 self.shuffler.reset_matrix()
@@ -240,7 +240,7 @@ class Game_Interface:
                 else:
                     pyf.changeLabel(self.text_time2, "{0:.3f}".format(end - start) + "s")
 
-                # pyf.changeLabel(self.text_memory2, "{0:.0f}".format(dfs_alg.get_memory_usage()) + "bytes")
+                pyf.changeLabel(self.text_memory2, "{0:.0f}".format(astar_alg.get_memory_usage()) + "bytes")
                 move_list = astar_alg.get_solution_path()
                 self.move_numbers(move_list, True)
                 self.shuffler.reset_matrix()
@@ -311,7 +311,7 @@ class Game_Interface:
 
 
 
-game = Game_Interface(5, c.FILENAME_STD)
-# game = Game_Interface(3, c.FILENAME_MAT)
+#game = Game_Interface(5, c.FILENAME_STD)
+game = Game_Interface(3, c.FILENAME_MAT)
 
 game.run()

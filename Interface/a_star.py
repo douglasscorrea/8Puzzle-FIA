@@ -2,7 +2,7 @@ import numpy as np
 import node
 import utils
 import copy
-
+import sys
 
 class A_STAR():
     def __init__(self, matrix, board_size):
@@ -11,6 +11,7 @@ class A_STAR():
         self.sorted_matrix = utils.create_sorted_matrix(board_size)  # Matriz solucionada
         self.root = node.Node(0, -1, 0, self.board)  # No raiz
         self.solution_path = None # Caminho da solucao
+        self.max_nodes = 0
 
     # @param f Heuristica que sera utilizada nos calculos
     def a_star_algorithm(self, f):
@@ -19,8 +20,12 @@ class A_STAR():
         while True:
             curr_node = self.get_minor_node(open_nodes)
 
+            if self.max_nodes < len(open_nodes):
+                self.max_nodes = len(open_nodes)
+
             if np.array_equal(curr_node.get_board(), self.sorted_matrix):
                 self.solution_path = utils.get_solution(curr_node)
+                self.memory_usage = self.determine_memory_usage()
                 return
 
             neighbors = utils.get_neighbors(curr_node.get_board(), self.board_size)
@@ -48,6 +53,12 @@ class A_STAR():
 
     def get_solution_path(self):
         return self.solution_path
+
+    def determine_memory_usage(self):
+        return (self.max_nodes * sys.getsizeof(self.root))
+
+    def get_memory_usage(self):
+        return self.memory_usage
 
 '''matrix = np.zeros((3, 3))
 matrix[0][0] = 0
