@@ -66,6 +66,7 @@ class Game_Interface:
         # Mostra sprites na tela
         for i in range(0, nmax*nmax):
             pyf.showSprite(self.sprite_list[i])
+            # print(i)
         pyf.showSprite(self.shuffle_button)
         pyf.showSprite(self.plus)
         pyf.showSprite(self.minus)
@@ -101,7 +102,7 @@ class Game_Interface:
 
 
     def initial_transformation(self):
-        factor = (600/self.nmax) / self.imagesize
+        factor = (600.0/self.nmax) / self.imagesize
         self.imagesize = self.imagesize * factor
         for i in range(0, self.nmax * self.nmax):
             pyf.transformSprite(self.sprite_list[i], 0, factor)
@@ -310,7 +311,7 @@ class Game_Interface:
 
 
 
-#game = Game_Interface(5, c.FILENAME_STD)
-game = Game_Interface(3, c.FILENAME_MAT)
+game = Game_Interface(5, c.FILENAME_STD)
+# game = Game_Interface(3, c.FILENAME_MAT)
 
 game.run()
