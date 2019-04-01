@@ -39,3 +39,6 @@ class Shuffle:
 
     def get_matrix(self):
         return self.matrix
+
+    def reset_matrix(self):
+        self.matrix = utils.create_sorted_matrix(self.nmax) 

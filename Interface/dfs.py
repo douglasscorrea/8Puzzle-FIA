@@ -37,7 +37,7 @@ class DFS():
 
             if np.array_equal(np.array(current_node.get_board()), np.array(self.sorted_matrix)):
                 print("Tabuleiro final")
-                print(current_node.get_board())
+                #print(current_node.get_board())
                 print('Completou puzzle')
                 self.solution_path = self.get_solution(current_node)
                 self.memory_usage = self.determine_memory_usage(not_visited_nodes)
@@ -81,7 +81,7 @@ class DFS():
         return self.solution_path
 
     def determine_memory_usage(self, nodes):
-        return (self.max_nodes * sys.getsizeof(nodes[0]))
+        return (self.max_nodes * sys.getsizeof(self.root))
 
     def get_memory_usage(self):
         return self.memory_usage

@@ -172,6 +172,8 @@ class Game_Interface:
                 pyf.changeLabel(self.text_memory2, "{0:.3f}".format(bfs_alg.get_memory_usage()) + "MB")
                 move_list = bfs_alg.get_solution_path()
                 self.move_numbers(move_list, True)
+                self.shuffler.reset_matrix()
+
 
             # DFS
             if pyf.spriteClicked(self.DFS_button):
@@ -188,6 +190,7 @@ class Game_Interface:
                 pyf.changeLabel(self.text_memory2, "{0:.0f}".format(dfs_alg.get_memory_usage()) + "bytes")
                 move_list = dfs_alg.get_solution_path()
                 self.move_numbers(move_list, True)
+                self.shuffler.reset_matrix()
 
             # DFS_IT
             if pyf.spriteClicked(self.DFS_IT_button):
@@ -205,6 +208,7 @@ class Game_Interface:
                 pyf.changeLabel(self.text_memory2, "{0:.0f}".format(dfs_it_alg.get_memory_usage()) + "bytes")
                 move_list = dfs_it_alg.get_solution_path()
                 self.move_numbers(move_list, True)
+                self.shuffler.reset_matrix()
 
             # A_STAR H1
             if pyf.spriteClicked(self.A1_button):
@@ -221,6 +225,7 @@ class Game_Interface:
                 #pyf.changeLabel(self.text_memory2, "{0:.0f}".format(dfs_alg.get_memory_usage()) + "bytes")
                 move_list = astar_alg.get_solution_path()
                 self.move_numbers(move_list, True)
+                self.shuffler.reset_matrix()
 
             # A_STAR H2
             if pyf.spriteClicked(self.A2_button):
@@ -237,6 +242,7 @@ class Game_Interface:
                 # pyf.changeLabel(self.text_memory2, "{0:.0f}".format(dfs_alg.get_memory_usage()) + "bytes")
                 move_list = astar_alg.get_solution_path()
                 self.move_numbers(move_list, True)
+                self.shuffler.reset_matrix()
 
         pyf.endWait()
 
