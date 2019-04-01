@@ -6,6 +6,7 @@ import time
 import shuffle
 import bfs
 import dfs
+import it_dfs
 import a_star
 import utils
 
@@ -35,7 +36,7 @@ class Game_Interface:
         self.shuffle_button = pyf.makeSprite("images/shuffle.png")
         self.BFS_button = pyf.makeSprite("images/BFS.png")
         self.DFS_button = pyf.makeSprite("images/DFS.png")
-        self.BFS_IT_button = pyf.makeSprite("images/BFS_IT.png")
+        self.DFS_IT_button = pyf.makeSprite("images/BFS_IT.png")
         self.A1_button = pyf.makeSprite("images/A_H1.png")
         self.A2_button = pyf.makeSprite("images/A_H2.png")
         self.text_shuffler_label = pyf.makeLabel(u"Número de iterações: ", 30, 50, 690, "black", "Arial", "clear")
@@ -58,7 +59,7 @@ class Game_Interface:
         pyf.moveSprite(self.minus, 460, 710, True)
         pyf.moveSprite(self.BFS_button, 800, 100, True)
         pyf.moveSprite(self.DFS_button, 1010, 100, True)
-        pyf.moveSprite(self.BFS_IT_button, 900, 210, True)
+        pyf.moveSprite(self.DFS_IT_button, 900, 210, True)
         pyf.moveSprite(self.A1_button, 800, 320, True)
         pyf.moveSprite(self.A2_button, 1010, 320, True)
 
@@ -72,7 +73,7 @@ class Game_Interface:
         pyf.showLabel(self.number_shuffler_label)
         pyf.showLabel(self.BFS_button)
         pyf.showLabel(self.DFS_button)
-        pyf.showLabel(self.BFS_IT_button)
+        pyf.showLabel(self.DFS_IT_button)
         pyf.showLabel(self.A1_button)
         pyf.showLabel(self.A2_button)
         pyf.showLabel(self.text_time)
@@ -186,6 +187,23 @@ class Game_Interface:
 
                 pyf.changeLabel(self.text_memory2, "{0:.0f}".format(dfs_alg.get_memory_usage()) + "bytes")
                 move_list = dfs_alg.get_solution_path()
+                self.move_numbers(move_list, True)
+
+            # DFS_IT
+            if pyf.spriteClicked(self.DFS_IT_button):
+                # modificar manualmente a profundidade máxima inicial
+                dfs_it_alg = it_dfs.IT_DFS(self.shuffler.get_matrix(), self.nmax)
+                start = time.time()
+                dfs_it_alg.IT_DFS_algorithm()
+                end = time.time()
+
+                if end - start < 1:
+                    pyf.changeLabel(self.text_time2, "{0:.3f}".format((end - start) * 1000) + "ms")
+                else:
+                    pyf.changeLabel(self.text_time2, "{0:.3f}".format(end - start) + "s")
+
+                pyf.changeLabel(self.text_memory2, "{0:.0f}".format(dfs_it_alg.get_memory_usage()) + "bytes")
+                move_list = dfs_it_alg.get_solution_path()
                 self.move_numbers(move_list, True)
 
             # A_STAR H1

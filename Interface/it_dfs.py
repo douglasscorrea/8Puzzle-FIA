@@ -50,7 +50,7 @@ class IT_DFS():
                 print(current_node.get_board())
                 print('Completou puzzle')
                 self.solution_path = self.get_solution(current_node)
-                # self.memory_usage = self.determine_memory_usage(not_visited_nodes)
+                self.memory_usage = self.determine_memory_usage(not_visited_nodes)
                 print("Movimentos para completar: " + str(self.solution_path))
                 return
             else:
