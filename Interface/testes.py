@@ -7,18 +7,37 @@ import dfs
 import it_dfs
 import a_star
 import utils
+import numpy as np
 
+shuffler = shuffle.Shuffle(3)
+boards = []
+num_shuffle = 1
+while len(boards) < 5:
 
+    shuffler.shuffle_algorithm(num_shuffle)
+    num_shuffle += 1
 
+    astar_alg = a_star.A_STAR(shuffler.get_matrix(), 3)
+    astar_alg.a_star_algorithm(utils.manhattan_heuristic)    
 
-bfs_alg = bfs.BFS(self.shuffler.get_matrix(), self.nmax)
-start = time.time()
-bfs_alg.BFS_algorithm()
-end = time.time()
+    move_list = astar_alg.get_solution_path()
 
-if end - start < 1:
-    print(self.text_time2, "{0:.3f}".format((end - start) * 1000) + "ms")
-else:
-   print(self.text_time2, "{0:.3f}".format(end - start) + "s")
+    tam = len(move_list)
 
-print(self.text_memory2, "{0:.3f}".format(bfs_alg.get_memory_usage()) + "MB")
+    if len(boards) == 0:
+        tupla = (str(tam), shuffler.get_matrix())
+        boards.append(tupla)     
+    else:
+        if not str(tam) in (item[0] for item in boards):
+            print(shuffler.get_matrix())
+            tupla = (str(tam), shuffler.get_matrix())
+            boards.append(tupla)
+    print("NUM SHUFFLE: " + str(num_shuffle))
+    
+    print(len(boards))
+# item = []
+# for array in boards:
+#     item.append(np.array(array[1]))
+
+for board in boards:
+    print(board)
