@@ -170,7 +170,7 @@ class Game_Interface:
                 else:
                     pyf.changeLabel(self.text_time2, "{0:.3f}".format(end - start) + "s")
 
-                pyf.changeLabel(self.text_memory2, "{0:.3f}".format(bfs_alg.get_memory_usage()) + "MB")
+                pyf.changeLabel(self.text_memory2, "{0:.0f}".format(bfs_alg.get_memory_usage()) + " bytes")
                 move_list = bfs_alg.get_solution_path()
                 self.move_numbers(move_list, True)
                 self.shuffler.reset_matrix()
