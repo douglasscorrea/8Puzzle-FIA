@@ -105,6 +105,21 @@ def diff_heuristic(board, n):
     return diff_itens
 
 
+# @param board = matriz
+# @param n = dimensao da matriz
+# @return
+def chessboard_heuristic(board, n):
+    sorted = create_sorted_matrix(n)
+    count = 0
+    for i in range(0, n):
+        for j in range(0, n):
+            temp = board[i][j]
+            for k in range(0, n):
+                for l in range(0, n):
+                    if board[i][j] == sorted[k][l]:
+                        count += max([abs(k-i), abs(l-j)])
+    return count
+
 def get_solution(curr_node):
     solution = []
     while (curr_node.get_value() != -1):

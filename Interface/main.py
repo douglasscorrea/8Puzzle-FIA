@@ -215,7 +215,7 @@ class Game_Interface:
             if pyf.spriteClicked(self.A1_button):
                 astar_alg = a_star.A_STAR(self.shuffler.get_matrix(), self.nmax)
                 start = time.time()
-                astar_alg.a_star_algorithm(utils.diff_heuristic)
+                astar_alg.a_star_algorithm(utils.chessboard_heuristic)
                 end = time.time()
 
                 if end - start < 1:
@@ -311,7 +311,8 @@ class Game_Interface:
 
 
 
-#game = Game_Interface(5, c.FILENAME_STD)
-game = Game_Interface(3, c.FILENAME_MAT)
+game = Game_Interface(5, c.FILENAME_STD)
+#game = Game_Interface(3, c.FILENAME_MAT)
+#game = Game_Interface(3, c.FILENAME_JAC)
 
 game.run()

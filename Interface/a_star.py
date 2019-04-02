@@ -62,14 +62,14 @@ class A_STAR():
 
 '''matrix = np.zeros((3, 3))
 matrix[0][0] = 0
-matrix[0][1] = 6
-matrix[0][2] = 7
+matrix[0][1] = 8
+matrix[0][2] = 5
 matrix[1][0] = 4
-matrix[1][1] = 8
-matrix[1][2] = 1
-matrix[2][0] = 5
-matrix[2][1] = 3
-matrix[2][2] = 2
+matrix[1][1] = 2
+matrix[1][2] = 3
+matrix[2][0] = 6
+matrix[2][1] = 7
+matrix[2][2] = 1
 teste = A_STAR(matrix, 3)
-teste.a_star_algorithm(utils.diff_heuristic)
+teste.a_star_algorithm(utils.manhattan_heuristic)
 print(teste.get_solution_path())'''
