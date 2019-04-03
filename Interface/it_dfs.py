@@ -31,6 +31,10 @@ class IT_DFS():
         curr_depth = 0
 
         while True:
+	    if np.array_equal(np.array(self.root.get_board()), np.array(self.sorted_matrix)):
+		self.solution_path = [8, 8]
+		self.memory_usage = 0
+		return
             self.IT_DFS_algorithm_slave(curr_depth)
             if self.get_solution_path() == []:
                 curr_depth += 1
