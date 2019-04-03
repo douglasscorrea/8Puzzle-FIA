@@ -36,12 +36,12 @@ class DFS():
             current_node = not_visited_nodes.pop()
 
             if np.array_equal(np.array(current_node.get_board()), np.array(self.sorted_matrix)):
-                print("Tabuleiro final")
+                #print("Tabuleiro final")
                 #print(current_node.get_board())
-                print('Completou puzzle')
+                #print('Completou puzzle')
                 self.solution_path = self.get_solution(current_node)
                 self.memory_usage = self.determine_memory_usage(not_visited_nodes)
-                print("Movimentos para completar: " + str(self.solution_path))
+                #print("Movimentos para completar: " + str(self.solution_path))
                 return
             else:
                 if current_node.get_depth() <= 31:
