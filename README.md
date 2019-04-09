@@ -34,7 +34,7 @@ O tabuleiro pode possuir tamanhos 3x3, 4x4 e 5x5. Para escolher o tamanho e a im
 
 
 #####  Tamanho 3x3
-O tamanho 3x3 pode possui 3 imagens diferentes que podem ser utilizadas. Para escolher qual imagem utilizar na interface utilizar 1 dos trechos mostrados abaixo ao final do arquivo **main.py**
+O tamanho 3x3 possui 3 imagens diferentes que podem ser utilizadas. Para escolher qual imagem utilizar na interface utilizar 1 dos trechos mostrados abaixo ao final do arquivo **main.py**
 ```python
 # Imagem 1 
 game = Game_Interface(3, c.FILENAME_MAT)
