@@ -310,9 +310,9 @@ class Game_Interface:
         return text_surface, text_surface.get_rect()
 
 
-
-game = Game_Interface(5, c.FILENAME_STD)
-#game = Game_Interface(3, c.FILENAME_MAT)
+game = Game_Interface(3, c.FILENAME_MAT)
 #game = Game_Interface(3, c.FILENAME_JAC)
-
+#game = Game_Interface(3, c.FILENAME_STD)
+#game = Game_Interface(4, c.FILENAME_STD)
+#game = Game_Interface(5, c.FILENAME_STD)
 game.run()
