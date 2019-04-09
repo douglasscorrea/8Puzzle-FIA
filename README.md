@@ -1,6 +1,6 @@
 # Quebra-cabeça Deslizante (n-Puzzle)
 
-Este relatório descreve o trabalho 1 da disciplina de Fundamentos de Inteligência Artificial cursada no Programa de Pós-Graduação em Computação da Universidade Federal de Pelotas cursada  em 2019/1. Como trabalho, foram implementados algoritmos para a resolução do problema Sliding Puzzle (Quebra-cabeça Delizante). Os algoritmos desenvolvidos foram a busca em largura, busca em profundidade, busca em profundidade iterativa e o algoritmo A* com duas heurísticas de menor caminho (Manhattan Distance e Chessboard Distance).
+Este repositório descreve o trabalho 1 da disciplina de Fundamentos de Inteligência Artificial cursada no Programa de Pós-Graduação em Computação da Universidade Federal de Pelotas cursada  em 2019/1. Como trabalho, foram implementados algoritmos para a resolução do problema Sliding Puzzle (Quebra-cabeça Delizante). Os algoritmos desenvolvidos foram a busca em largura, busca em profundidade, busca em profundidade iterativa e o algoritmo A* com duas heurísticas de menor caminho (Manhattan Distance e Chessboard Distance).
 
 ## Autores
 Este trabalho foi desenvolvido em conjunto pelo seguintes autores
