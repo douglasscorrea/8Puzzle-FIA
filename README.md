@@ -30,9 +30,8 @@ Os algoritmos podem ser rodados individualmente ou utilizando a interface gráfi
 #### Escolhendo o tamanho do tabuleiro para a interface gráfica
 O tabuleiro pode possuir tamanhos 3x3, 4x4 e 5x5. Para escolher o tamanho e a imagem utilizada na interface ver tutoriais abaixo é necessário modificar o código ao final do arquivo **main.py** como os códigos apresentados abaixo
 
-```
-![Interface gráfica desenvolvida para tabuleiro 3x3](https://imgur.com/a/aL7iGFn)
-```
+![Interface gráfica desenvolvida para tabuleiro 3x3](https://github.com/pHgon/8Puzzle-FIA/blob/master/Interface/images/3x3.png)
+
 
 #####  Tamanho 3x3
 O tamanho 3x3 pode possui 3 imagens diferentes que podem ser utilizadas. Para escolher qual imagem utilizar na interface utilizar 1 dos trechos mostrados abaixo ao final do arquivo **main.py**
