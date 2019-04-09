@@ -98,22 +98,22 @@ shuffler.shuffle_algorithm(shuffle_number)
 ```
 
 ##### Rodando os algoritmos sem interface gráfica
-##### Busca em Largura
+###### Busca em Largura
 ```python
 bfs_alg = bfs.BFS(shuffler.get_matrix(), board_size)
 bfs_alg.BFS_algorithm()
 ```
-##### Busca em Profundidade
+###### Busca em Profundidade
 ```python
 dfs_alg = dfs.DFS(shuffler.get_matrix(), board_size)
 dfs_alg.DFS_algorithm()
 ```
-##### Busca em Profundidade Iterativa
+###### Busca em Profundidade Iterativa
 ```python
 idfs_alg = idfs.IT_DFS(shuffler.get_matrix(), board_size)
 idfs_alg.IT_DFS_algorithm()
 ```
-##### A*
+###### A*
 Para o algoritmo A* é necessário especificar a heurística de menor caminho utilizada. Três heurísticas estão disponíveis no arquivo **utils.py**
 
 * diff_heuristic: Peças fora do lugar correto
