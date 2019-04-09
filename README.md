@@ -73,7 +73,7 @@ game = Game_Interface(4, c.FILENAME_STD)
 ```
 
 #####  Tamanho 5x5
-O tamanho 5x5 possui somente uma imagem disponível. Para utilizar o tamanho 4x4, utilizar o seguinte trecho de código ao final do arquivo **main.py**
+O tamanho 5x5 possui somente uma imagem disponível. Para utilizar o tamanho 5x5, utilizar o seguinte trecho de código ao final do arquivo **main.py**
 
 ```python
 # Imagem 3
